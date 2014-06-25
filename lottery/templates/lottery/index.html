@@ -1,16 +1,29 @@
 <html>
+	<head>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+		<script>
+		$(document).ready(function() {
+			$('form').submit(function(e) {
+			 	e.preventDefault();
+				console.log('send form');
+				$.ajax({
+					url: "/json",
+					dataType: "json",
+					data: {number: $('#id_number').val()}
+				}).done(function(data) {
+					var html = data.ticket ? ('Yes, you won on ticket ' + data.ticket) : 'No, better luck next time';
+					$("#result").html(html);
+				}).fail(function(jqXHR, textStatus, errorThrown) {
+					$("#result").html('sum thing wong: ' + errorThrown)
+				});
+			});
+		});
+		</script>
+	</head>
 	<body>
 		<h1>Lottery!</h1>
 		<h2>Did I win?</h2>
-		{% if form.number.value %}
-		<p>{% if result %}
-			Yes, you won on ticket {{ result }}
-			{% else %}
-			No, better luck next time
-			{% endif %}
-		</p>
-		{%endif%}
-		
+		<p id="result"> </p>
 		<form method="post">
 			{% csrf_token %}
 			{{form.as_p}}

@@ -7,4 +7,5 @@ admin.autodiscover()
 urlpatterns = patterns('lottery.views',
     (r'^admin/', include(admin.site.urls)),
     url('^$', 'index', name='index'),
+    url('^json/?$', 'jsonf', name='jsonf'),
 )
