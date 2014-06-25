@@ -113,6 +113,10 @@ TEMPLATE_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
 )
 
+RAVEN_CONFIG = {
+    'dsn': 'https://cae7c2f91ab542a38c459332e76cedfd:46db72dd3487476e892ec7cb63c91712@sentry.crop-r.com/8',
+}
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -124,7 +128,8 @@ INSTALLED_APPS = (
      'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-    'lottery'
+    'lottery',
+    'raven.contrib.django.raven_compat',
 )
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
